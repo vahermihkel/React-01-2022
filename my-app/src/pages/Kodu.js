@@ -1,7 +1,6 @@
+import { Link } from 'react-router-dom';
 
 function Kodu() {
-
-  
 
   function saaTooted() {
     return [{nimetus: "Coca Cola", hind: 1.5, kategooria: "coca", pilt: "https://www.selver.ee/img/800/800/resize/5/4/54490703.jpg"},
@@ -19,10 +18,13 @@ function Kodu() {
     <div>
       {saaTooted().map(toode => 
       <div key={toode.nimetus} className="toode">
-        <div>{toode.nimetus}</div>
-        <div>{toode.hind}</div>
-        <div>{toode.kategooria}</div>
-        <img src={toode.pilt} alt="" /><br />
+        {/* <Link to={`/toode/${toode.nimetus}`}></Link> */}
+        <Link to={"/toode/" + toode.nimetus.toLowerCase().replace(" ","-")}>
+          <div>{toode.nimetus}</div>
+          <div>{toode.hind}</div>
+          <div>{toode.kategooria}</div>
+          <img src={toode.pilt} alt="" /><br />
+        </Link>
         <button onClick={lisaOstukorvi}>Lisa ostukorvi</button><br /><br />
       </div>)}
     </div>
