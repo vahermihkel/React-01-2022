@@ -10,8 +10,25 @@ function Kodu() {
     {nimetus: "Vichy", hind: 1.5, kategooria: "water", pilt: "https://saku.ee/media/18809/ee_vichy-vitamin-sport.png"}];
   }
 
-  function lisaOstukorvi() {
-    console.log("töötab nupuvajutus");
+  function lisaOstukorvi(lisatavToode) {
+    // JSON.parse("[Object]")  ---> Unexpected token o in JSON at position 1
+    // JSON.parse("[{}]"")  ---> [{}]
+
+    // "[{},{},{}]".push() --->   ostukorv.push is not a function
+    // [{},{},{}].push({...}) ---> [{},{},{},{...}]
+    
+    if (sessionStorage.getItem("ostukorv")) {
+      const ostukorv = JSON.parse(sessionStorage.getItem("ostukorv"));
+      ostukorv.push(lisatavToode);
+      // console.log(mutuja);
+      // console.log(JSON.parse(ostukorv));
+                                  //[{},{},{},{...}] --> "[{},{},{},{...}]"
+      sessionStorage.setItem("ostukorv", JSON.stringify(ostukorv));
+    } else {
+                                // [{nim: Fanta,..}] --> "[{nim: Fanta,..}]"
+      sessionStorage.setItem("ostukorv", JSON.stringify([lisatavToode]));
+    }
+    
   }
 
   return (
@@ -25,7 +42,9 @@ function Kodu() {
           <div>{toode.kategooria}</div>
           <img src={toode.pilt} alt="" /><br />
         </Link>
-        <button onClick={lisaOstukorvi}>Lisa ostukorvi</button><br /><br />
+              {/* () => on selleks, et saaksin kasutada funktsiooni järel sulgusid
+              ja et ta ei läheks koheselt käima vaid nupuvajutusega */}
+        <button onClick={() => lisaOstukorvi(toode)}>Lisa ostukorvi</button><br /><br />
       </div>)}
     </div>
   );

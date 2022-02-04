@@ -8,6 +8,7 @@ import Admin from './pages/Admin';
 import LisaToode from './pages/LisaToode';
 import VaataTooteid from './pages/VaataTooteid';
 import ÜksikToode from './pages/ÜksikToode';
+import MuudaToode from './pages/MuudaToode';
 
 // to="/" -- localhost:3000
 // to="/ostukorv" -- localhost:3000/ostukorv
@@ -23,6 +24,7 @@ function App() {
         <Route path="/admin" exact element={ <Admin /> } />
         <Route path="/admin/lisa" exact element={ <LisaToode /> } />
         <Route path="/admin/tooted" exact element={ <VaataTooteid /> } />
+        <Route path="/admin/muuda/:tooteNimi" exact element={ <MuudaToode /> } />
         <Route path="/toode/:tooteNimi" exact element={ <ÜksikToode /> } />
       </Routes>
     </div>

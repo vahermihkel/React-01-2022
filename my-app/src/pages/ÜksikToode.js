@@ -8,7 +8,7 @@ function ÜksikToode() {
   // ["Elas", "metsas","mutionu,","keset","kuuski"]
 
   // "Elas metsas mutionu, keset kuuski".split("a") ----
-  // ["El","s mets","s mutionu, keset kuuski"]
+  // ["El","s mets","s mutionu, keset kuuski"][2] ---- "s mutionu, keset kuuski"
 
   console.log(window.location.href.split("toode/"));
   console.log(window.location.href.split("toode/")[1]);
@@ -26,11 +26,16 @@ function ÜksikToode() {
     {nimetus: "Vichy", hind: 1.5, kategooria: "water", pilt: "https://saku.ee/media/18809/ee_vichy-vitamin-sport.png"}];
   }
 
-  return(<div>
-    <div>Nimetus: {toode.nimetus}</div>
-    <div>Hind: {toode.hind}</div>
-    <div>Kategooria: {toode.kategooria}</div>
-    <img src={toode.pilt} alt="" />
+  return(
+    <div>
+    { toode && // toode !== undefined
+    <div>
+      <div>Nimetus: {toode.nimetus}</div>
+      <div>Hind: {toode.hind}</div>
+      <div>Kategooria: {toode.kategooria}</div>
+      <img src={toode.pilt} alt="" />
+    </div>}
+    { !toode && <div>Sellist toodet ei eksisteeri</div> }
   </div>)
 }
 
