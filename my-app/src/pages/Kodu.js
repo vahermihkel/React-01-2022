@@ -1,8 +1,26 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Kodu() {
+  const [tooted, uuendaTooted] = useState([]);
 
-  function saaTooted() {
+  useEffect(() => {
+    fetch("https://react-01-2022-default-rtdb.europe-west1.firebasedatabase.app/tooted.json")
+    .then(response => {
+        return response.json();
+      }).then(data => {
+        console.log(data)
+        const newArray = [];
+        for (const key in data) {
+          newArray.push(data[key]);
+        }
+        console.log(newArray);
+        uuendaTooted(newArray);
+      }
+    );
+  },[])
+
+  function saaTooted() {   // hard-coded
     return [{nimetus: "Coca Cola", hind: 1.5, kategooria: "coca", pilt: "https://www.selver.ee/img/800/800/resize/5/4/54490703.jpg"},
     {nimetus: "Fanta", hind: 1, kategooria: "coca", pilt: ""},
     {nimetus: "Sprite", hind: 1, kategooria: "coca", pilt: ""},
@@ -33,7 +51,7 @@ function Kodu() {
 
   return (
     <div>
-      {saaTooted().map(toode => 
+      {tooted.map(toode => 
       <div key={toode.nimetus} className="toode">
         {/* <Link to={`/toode/${toode.nimetus}`}></Link> */}
         <Link to={"/toode/" + toode.nimetus.toLowerCase().replace(" ","-")}>

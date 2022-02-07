@@ -18,6 +18,12 @@ function LisaToode() {
       aktiivne: aktiivneRef.current.checked
     }
     console.log(toode);
+    fetch("https://react-01-2022-default-rtdb.europe-west1.firebasedatabase.app/tooted.json",
+      {
+        method: "POST",
+        body: JSON.stringify(toode)
+      }
+    );
   }
 
   return(
