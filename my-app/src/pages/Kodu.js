@@ -20,13 +20,13 @@ function Kodu() {
     );
   },[])
 
-  function saaTooted() {   // hard-coded
-    return [{nimetus: "Coca Cola", hind: 1.5, kategooria: "coca", pilt: "https://www.selver.ee/img/800/800/resize/5/4/54490703.jpg"},
-    {nimetus: "Fanta", hind: 1, kategooria: "coca", pilt: ""},
-    {nimetus: "Sprite", hind: 1, kategooria: "coca", pilt: ""},
-    {nimetus: "Vitamin well", hind: 2, kategooria: "water", pilt: "https://www.vitaminwell.com/wp-content/uploads/2019/01/EXP_VW_CELEBRATE_Ltd_1.14-219x884.png"},
-    {nimetus: "Vichy", hind: 1.5, kategooria: "water", pilt: "https://saku.ee/media/18809/ee_vichy-vitamin-sport.png"}];
-  }
+  // function saaTooted() {   // hard-coded
+  //   return [{nimetus: "Coca Cola", hind: 1.5, kategooria: "coca", pilt: "https://www.selver.ee/img/800/800/resize/5/4/54490703.jpg"},
+  //   {nimetus: "Fanta", hind: 1, kategooria: "coca", pilt: ""},
+  //   {nimetus: "Sprite", hind: 1, kategooria: "coca", pilt: ""},
+  //   {nimetus: "Vitamin well", hind: 2, kategooria: "water", pilt: "https://www.vitaminwell.com/wp-content/uploads/2019/01/EXP_VW_CELEBRATE_Ltd_1.14-219x884.png"},
+  //   {nimetus: "Vichy", hind: 1.5, kategooria: "water", pilt: "https://saku.ee/media/18809/ee_vichy-vitamin-sport.png"}];
+  // }
 
   function lisaOstukorvi(lisatavToode) {
     // JSON.parse("[Object]")  ---> Unexpected token o in JSON at position 1
