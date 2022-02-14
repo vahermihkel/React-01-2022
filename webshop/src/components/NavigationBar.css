@@ -1,3 +1,13 @@
 .logo {
   height: 100px;
 }
+
+.lang-flag {
+  height: 30px;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.lang-flag:hover {
+  opacity: 1;
+}

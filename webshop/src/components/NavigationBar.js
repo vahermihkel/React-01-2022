@@ -12,16 +12,22 @@ function NavigationBar() {
   const { t, i18n } = useTranslation();
   //  const { t } = useTranslation();
 
+  function changeLang(language) {
+    i18n.changeLanguage(language);
+    localStorage.setItem("language", language);
+  }
+
   return (
   <Navbar bg="dark" variant="dark">
     <Container>
     <Navbar.Brand as={Link} to="/"> <img className='logo' alt='main logo' src='/webshio.png' /> </Navbar.Brand>
     <Nav className="me-auto">
-      <Nav.Link as={Link} to="/admin">Admin vaatesse</Nav.Link>
+      <Nav.Link as={Link} to="/admin">{t('admin-button')}</Nav.Link>
       <Nav.Link as={Link} to="/ostukorv">{t('cart-button')}</Nav.Link>
     </Nav>
-    <button onClick={() => i18n.changeLanguage('en')}>ENGLISH</button>
-    <button onClick={() => i18n.changeLanguage('fr')}>FRENCH</button>
+    <img className="lang-flag" alt="" src="/language/united-kingdom.png" onClick={() => changeLang('en')} />
+    <img className="lang-flag" alt="" src="/language/estonia.png" onClick={() => changeLang('ee')} />
+    <img className="lang-flag" alt="" src="/language/russia.png" onClick={() => changeLang('ru')} />
     </Container>
   </Navbar>);
 }
