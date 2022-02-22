@@ -48,12 +48,40 @@ function Home() {
     sessionStorage.setItem("cart",JSON.stringify(cartProducts));
   }
 
-  return (<div>{products.map(element => <div>
-    <div>{element.name}</div>
-    <img src={element.imgSrc} alt="" />
-    <div>{element.price}€</div>
-    <button onClick={() => onAddToCart(element)}>{t("add-to-cart-button")}</button>
-  </div>)}</div>)
+  function sortAZ() {
+    products.sort((a, b) => a.name.localeCompare(b.name));
+    setProducts(products.slice());
+  }
+
+  function sortZA() {
+    products.sort((a, b) => b.name.localeCompare(a.name));
+    setProducts(products.slice());
+  }
+
+  function sortPriceAsc() {
+    products.sort((a, b) => a.price - b.price);
+    setProducts(products.slice());
+  }
+
+  function sortPriceDesc() {
+    products.sort((a, b) => b.price - a.price);
+    setProducts(products.slice());
+  }
+
+  return (
+  <div>
+    <button onClick={sortAZ}>Sorteeri A-Z</button>
+    <button onClick={sortZA}>Sorteeri Z-A</button>
+    <button onClick={sortPriceAsc}>Hinna järgi kasvavalt</button>
+    <button onClick={sortPriceDesc}>Hinna järgi kahanevalt</button>
+    <div>{products.map(element => <div>
+        <div>{element.name}</div>
+        <img src={element.imgSrc} alt="" />
+        <div>{element.price}€</div>
+        <button onClick={() => onAddToCart(element)}>{t("add-to-cart-button")}</button>
+      </div>)}
+    </div>
+  </div>)
 }
 
 // export, et saaks importida

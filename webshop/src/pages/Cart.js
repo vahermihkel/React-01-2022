@@ -1,4 +1,6 @@
 import { useState } from "react";
+import PackageMachines from "../components/PackageMachines";
+import styles from "./Cart.module.css";
 
 function Cart() {
 
@@ -84,19 +86,29 @@ function Cart() {
     .then(data => window.location.href = data.payment_link);
   }
 
-  return (<div>{cartProducts.map(element => <div>
-    <div>{element.cartProduct.name}</div>
-    <div>{element.cartProduct.price} €</div>
-    <button onClick={() => onDecreaseQuantity(element)}>-</button>
-    <div>{element.quantity} tk</div>
-    <button onClick={() => onIncreaseQuantity(element)}>+</button>
-    <div>KOKKU: {element.cartProduct.price * element.quantity} €</div>
-    <button onClick={() => onRemoveFromCart(element)}>x</button>
-    <br /><br />
-  </div>)}
-  { cartProducts.length > 0 && <div>{calculateSumOfCart()}</div>}
-  { cartProducts.length > 0 && <button onClick={onPay}>Maksa</button> }
-  </div>)
+                                                    // pöördun imporditud CSS klassi poole
+                                                    // ja võtan sealt CSS klassi
+  return (
+  <div>
+    <div>{cartProducts.map(element => <div className={styles.cartItem}>
+      <div className={styles.cartItemName}>{element.cartProduct.name}</div>
+      <div className={styles.cartItemPrice}>{element.cartProduct.price} €</div>
+      <div className={styles.cartItemQuantityControls}>
+        <img className={styles.cartItemButton} onClick={() => onDecreaseQuantity(element)} src="/cart/minus.png" />
+        <div className={styles.cartItemQuantity}>{element.quantity} tk</div>
+        <img className={styles.cartItemButton} onClick={() => onIncreaseQuantity(element)} src="/cart/plus.png" />
+      </div>
+      <div className={styles.cartItemTotal}>{element.cartProduct.price * element.quantity} €</div>
+      <img className={styles.cartItemButton} onClick={() => onRemoveFromCart(element)} src="/cart/delete.png" />
+    </div>)}
+    { cartProducts.length > 0 && <div className={styles.cartSum}>
+        <div>{calculateSumOfCart()} €</div>
+        <button onClick={onPay}>Maksa ›</button>
+      </div> }
+    </div>
+    <PackageMachines />
+  </div>
+  )
 }
 
 export default Cart;
