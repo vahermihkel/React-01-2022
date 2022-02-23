@@ -41,6 +41,7 @@ function Home() {
       } else {
         // push
         const packageMachineIndex = cartProducts.findIndex(element => element.cartProduct.id === "11110000");
+        console.log(packageMachineIndex);
         if (packageMachineIndex === -1) {
           cartProducts.push({cartProduct: product, quantity: 1});
         } else {

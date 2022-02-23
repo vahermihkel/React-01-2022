@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 
 function PackageMachines(props) {
   const [packageMachines, setPackageMachines] = useState([]);
-  const [selectedMachine, setSelectedMachine] = useState(null);
+  const [selectedMachine, setSelectedMachine] = useState(
+                      sessionStorage.getItem("parcelmachine"));
 
   useEffect(()=>{
     fetch("https://www.omniva.ee/locations.json")
@@ -13,7 +14,9 @@ function PackageMachines(props) {
   function chooseMachine(event) {
     // console.log(selectedMachine);
     // console.log(packageMachine);
-    setSelectedMachine(event.target.value);
+    const selectedPackageMachine = event.target.value;
+    sessionStorage.setItem("parcelmachine",selectedPackageMachine)
+    setSelectedMachine(selectedPackageMachine);
     // const packageMachine = packageMachines.find(element => element.NAME === event.target.value);
     // console.log(event.target.value);
     // console.log(packageMachine);
@@ -26,6 +29,7 @@ function PackageMachines(props) {
 
   // ["banana", "mango", "apple"]  0   1   2     .length  === 3      .length-1
   function deleteMachine() {
+    sessionStorage.removeItem("parcelmachine");
     setSelectedMachine(null);
     const products = props.cartContent;
     products.splice(products.length-1);
