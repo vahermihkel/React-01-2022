@@ -86,6 +86,11 @@ function Cart() {
     .then(data => window.location.href = data.payment_link);
   }
 
+  // function updateCart(cartProducts) {
+  //   console.log(cartProducts);
+    
+  // }
+
                                                     // pöördun imporditud CSS klassi poole
                                                     // ja võtan sealt CSS klassi
   return (
@@ -94,19 +99,18 @@ function Cart() {
       <div className={styles.cartItemName}>{element.cartProduct.name}</div>
       <div className={styles.cartItemPrice}>{element.cartProduct.price} €</div>
       <div className={styles.cartItemQuantityControls}>
-        <img className={styles.cartItemButton} onClick={() => onDecreaseQuantity(element)} src="/cart/minus.png" />
+        { element.cartProduct.id !== "11110000" && <img className={styles.cartItemButton} onClick={() => onDecreaseQuantity(element)} src="/cart/minus.png" alt="" />}
         <div className={styles.cartItemQuantity}>{element.quantity} tk</div>
-        <img className={styles.cartItemButton} onClick={() => onIncreaseQuantity(element)} src="/cart/plus.png" />
+        { element.cartProduct.id !== "11110000" && <img className={styles.cartItemButton} onClick={() => onIncreaseQuantity(element)} src="/cart/plus.png" alt="" />}
       </div>
       <div className={styles.cartItemTotal}>{element.cartProduct.price * element.quantity} €</div>
-      <img className={styles.cartItemButton} onClick={() => onRemoveFromCart(element)} src="/cart/delete.png" />
-    </div>)}
+        { element.cartProduct.id !== "11110000" && <img className={styles.cartItemButton} onClick={() => onRemoveFromCart(element)} src="/cart/delete.png" alt="" />}    </div>)}
     { cartProducts.length > 0 && <div className={styles.cartSum}>
         <div>{calculateSumOfCart()} €</div>
         <button onClick={onPay}>Maksa ›</button>
       </div> }
     </div>
-    <PackageMachines />
+    <PackageMachines cartContent={cartProducts} sendProducts={setCartProducts} />
   </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function PackageMachines() {
+function PackageMachines(props) {
   const [packageMachines, setPackageMachines] = useState([]);
   const [selectedMachine, setSelectedMachine] = useState(null);
 
@@ -11,14 +11,26 @@ function PackageMachines() {
   },[]);
 
   function chooseMachine(event) {
-    console.log(selectedMachine);
+    // console.log(selectedMachine);
     // console.log(packageMachine);
     setSelectedMachine(event.target.value);
-    console.log(selectedMachine);
+    // const packageMachine = packageMachines.find(element => element.NAME === event.target.value);
+    // console.log(event.target.value);
+    // console.log(packageMachine);
+    const products = props.cartContent;
+    const packageMachineInCart = {cartProduct:{id: "11110000", name: "Pakiautomaadi tasu", price: 3.5},quantity:1};
+    products.push(packageMachineInCart);
+    sessionStorage.setItem("cart",JSON.stringify(products));
+    props.sendProducts(products.slice());
   }
 
+  // ["banana", "mango", "apple"]  0   1   2     .length  === 3      .length-1
   function deleteMachine() {
     setSelectedMachine(null);
+    const products = props.cartContent;
+    products.splice(products.length-1);
+    sessionStorage.setItem("cart",JSON.stringify(products));
+    props.sendProducts(products.slice());
   }
 
   return (
