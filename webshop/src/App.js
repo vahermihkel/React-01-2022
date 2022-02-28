@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import AdminHome from './pages/admin/AdminHome';
 import PaymentCompleted from './pages/PaymentCompleted';
+import AddProduct from './pages/admin/AddProduct';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
        <Route path='/' exact element={<Home />} />
        <Route path='/ostukorv' exact element={<Cart />} />
        <Route path='/admin' exact element={<AdminHome />} />
+       <Route path='/admin/lisa' exact element={<AddProduct />} />
        <Route path='/tellimus' exact element={<PaymentCompleted />} />
      </Routes>
    </div>

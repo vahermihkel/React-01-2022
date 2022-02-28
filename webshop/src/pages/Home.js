@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from "react-i18next";
+import Product from "../components/Product";
+import SortButtons from "../components/SortButtons";
 
 function Home() {
 
-  const [products, setProducts] = useState([]);
   const { t } = useTranslation();
+  const [products, setProducts] = useState([]);
 
   // kui läheb käima useState parempoolne funktsioon (ükskõik millisel useState-l),
   // siis tehakse terve Component uuesti kui ta on Componendi renderdamisega lõpule jõudnud
@@ -22,71 +25,16 @@ function Home() {
     );
   },[])
 
-  //          {name: "sadas", price: 4,...}
-  // hinna teada saamiseks element.price
-  // []  --> [{name: "sadas", price: 4,...}] --> [{name: "sadas", price: 4,...},{name: "sadas", price: 4,...}]
-  // hinna teada saamiseks element.cartProduct.price
-  // koguse poole pöördumiseks element.quantity
-  // []  --> [{cartProduct:{name: "sadas", price: 4,...},quantity:1}]
-  function onAddToCart(product) {
-    let cartProducts; // let muutujale saab anda uuesti
-    if (sessionStorage.getItem("cart")) {
-      cartProducts = JSON.parse(sessionStorage.getItem("cart"));
-      const index = cartProducts.findIndex(element => element.cartProduct.name === product.name);
-      if (index !== -1) {
-        // suurenda quantity't
-        cartProducts[index].quantity++; // suurendab ühe võrra (koodilühendus)
-                      // cartProducts[index].quantity = cartProducts[index].quantity + 1;
-                      // cartProducts[index].quantity += 1;
-      } else {
-        // push
-        const packageMachineIndex = cartProducts.findIndex(element => element.cartProduct.id === "11110000");
-        console.log(packageMachineIndex);
-        if (packageMachineIndex === -1) {
-          cartProducts.push({cartProduct: product, quantity: 1});
-        } else {
-          cartProducts.splice(cartProducts.length-1,0,{cartProduct: product, quantity: 1});
-        }
-      }
-    } else {
-      cartProducts = [{cartProduct: product, quantity: 1}];
-    }       // scope
-    sessionStorage.setItem("cart",JSON.stringify(cartProducts));
-  }
-
-  function sortAZ() {
-    products.sort((a, b) => a.name.localeCompare(b.name));
-    setProducts(products.slice());
-  }
-
-  function sortZA() {
-    products.sort((a, b) => b.name.localeCompare(a.name));
-    setProducts(products.slice());
-  }
-
-  function sortPriceAsc() {
-    products.sort((a, b) => a.price - b.price);
-    setProducts(products.slice());
-  }
-
-  function sortPriceDesc() {
-    products.sort((a, b) => b.price - a.price);
-    setProducts(products.slice());
-  }
-
   return (
   <div>
-    <button onClick={sortAZ}>Sorteeri A-Z</button>
-    <button onClick={sortZA}>Sorteeri Z-A</button>
-    <button onClick={sortPriceAsc}>Hinna järgi kasvavalt</button>
-    <button onClick={sortPriceDesc}>Hinna järgi kahanevalt</button>
-    <div>{products.map(element => <div>
-        <div>{element.name}</div>
-        <img src={element.imgSrc} alt="" />
-        <div>{element.price}€</div>
-        <button onClick={() => onAddToCart(element)}>{t("add-to-cart-button")}</button>
-      </div>)}
+    <SortButtons prods={products} prodsSorted={setProducts} />
+    <div>{products.map(element => <Product key={element.id}
+              product={element} addedToCart={() => toast.success(t("Edukalt lisatud ostukorvi!"), {
+                position: "bottom-right"
+              })}
+           />)}
     </div>
+    <ToastContainer />
   </div>)
 }
 

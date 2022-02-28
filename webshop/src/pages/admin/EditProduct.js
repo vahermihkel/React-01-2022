@@ -1,6 +1,6 @@
 
 function EditProduct() {
-  return (<div>EditProduct</div>)
+  return (<div>EditProduct / ID kontroll</div>)
 }
 
 export default EditProduct;
