@@ -50,7 +50,7 @@ function AddProduct() {
       );
       idRef.current.value = "";
       nameRef.current.value = "";
-      toast.success("Edukalt lisatud ostukorvi!", {
+      toast.success("Edukalt toode lisatud!", {
         position: "bottom-right",
         theme: "dark"
       });
@@ -59,7 +59,7 @@ function AddProduct() {
 
   function checkIdUniqueness() {
     if (idRef.current.value.length === 8) {
-      const index = products.findIndex(element => element.id === idRef.current.value);
+      const index = products.findIndex(element => element.id.toString() === idRef.current.value);
       if (index === -1) {
         setButtonDisabled(false);
       } else {
