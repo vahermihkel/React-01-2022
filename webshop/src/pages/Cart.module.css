@@ -63,11 +63,6 @@
   font-weight: bold;
 }
 
-.paymentButton {
-  width: 80px;
-  background-color: lightgray !important;
-}
-
 .buttonDisabled {
   width: 20px;
   height: 20px;

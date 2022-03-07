@@ -33,8 +33,6 @@ function EditProduct() {
     );
   },[productId])
 
-
-
   function editProduct(event) {
     event.preventDefault();
     if (!buttonDisabled &&

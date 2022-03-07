@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PackageMachines from "../components/PackageMachines";
+import Payment from "../components/Payment";
 import { cartSumService } from '../services/CartSumService'
 import styles from "./Cart.module.css";
 
@@ -75,41 +76,11 @@ function Cart() {
   //     return ordersLength + 100000;
   // }
 
-  function onPay() {
-    const paymentData = {
-      "api_username": "92ddcfab96e34a5f",
-      "account_name": "EUR3D1",
-      "amount": cartSum,
-      "order_reference": Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
-      "nonce": "92ddcfab96e34a5f" + new Date(),
-      "timestamp": new Date(),
-      "customer_url": "https://reactmihkel022022.web.app/tellimus"
-      };
-
-    fetch("https://igw-demo.every-pay.com/api/v4/payments/oneoff",
-      {
-        method: "POST",
-        body: JSON.stringify(paymentData),
-        headers: {
-          "Content-Type": "application/json",   
-          "Authorization": "Basic OTJkZGNmYWI5NmUzNGE1Zjo4Y2QxOWU5OWU5YzJjMjA4ZWU1NjNhYmY3ZDBlNGRhZA=="
-        }
-      }
-    ).then(res => res.json())
-    .then(data => window.location.href = data.payment_link);
-  }
-
   function isParcelMachine(parcelMachine) {
     return parcelMachine.cartProduct.id === "11110000";
   }
 
-  // function updateCart(cartProducts) {
-  //   console.log(cartProducts);
-    
-  // }
-
-                                                    // pöördun imporditud CSS klassi poole
-                                                    // ja võtan sealt CSS klassi
+                                                    // pöördun imporditud CSS klassi poole                                                // ja võtan sealt CSS klassi
   return (
   <div>
     <div>{cartProducts.map(element => <div key={element.cartProduct.id} className={styles.cartItem}>
@@ -132,7 +103,7 @@ function Cart() {
     { cartProducts.length > 0 && <div className={styles.cartSum}>
         <PackageMachines cartContent={cartProducts} sendProducts={setCartProducts} /> 
         <div>{cartSum} €</div>
-        <button className={styles.paymentButton} onClick={onPay}>Maksa ›</button>
+        <Payment sumOfCart={cartSum} />
       </div> }
     </div>
   </div>

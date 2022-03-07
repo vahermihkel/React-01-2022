@@ -11,3 +11,18 @@ input[type=number] {
 .cart-sum {
     color: white;
 }
+
+.paymentButton {
+    width: 80px;
+    background-color: lightgray !important;
+}
+
+.slick-slider {
+    margin-bottom: 100px;
+    width: 50%;
+    margin-left: 20%;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: black !important;
+}

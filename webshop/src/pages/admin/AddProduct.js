@@ -26,8 +26,6 @@ function AddProduct() {
     );
   },[])
 
-
-
   function addNewProduct(event) {
     event.preventDefault();
     if (!buttonDisabled &&

@@ -8,6 +8,8 @@ import PaymentCompleted from './pages/PaymentCompleted';
 import AddProduct from './pages/admin/AddProduct';
 import ViewProducts from './pages/admin/ViewProducts';
 import EditProduct from './pages/admin/EditProduct';
+import NotFound from './pages/NotFound';
+import Login from './pages/auth/Login';
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
        <Route path='/admin/muuda/:productId' exact element={<EditProduct />} />
        <Route path='/admin/lisa' exact element={<AddProduct />} />
        <Route path='/tellimus' exact element={<PaymentCompleted />} />
+       <Route path='/logi-sisse' exact element={<Login />} />
+       <Route path='*' exact element={<NotFound />} />
      </Routes>
    </div>
   );
