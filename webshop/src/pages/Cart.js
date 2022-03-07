@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PackageMachines from "../components/PackageMachines";
+import { cartSumService } from '../services/CartSumService'
 import styles from "./Cart.module.css";
 
 function Cart() {
 
   const [cartProducts, setCartProducts] = useState(getCart());
+  const [cartSum, setCartSum] = useState(0);
 
   function getCart() {
     if (sessionStorage.getItem("cart")) {
@@ -51,11 +53,12 @@ function Cart() {
     }
   }
 
-  function calculateSumOfCart() {
-    let sumOfCart = 0;
-    cartProducts.forEach(element => sumOfCart += element.cartProduct.price * element.quantity);
-    return sumOfCart;
-  }
+  useEffect(()=>{
+      let sumOfCart = 0;
+      cartProducts.forEach(element => sumOfCart += element.cartProduct.price * element.quantity);
+      setCartSum(sumOfCart.toFixed(2));
+      cartSumService.sendCartSum(sumOfCart.toFixed(2));
+  },[cartProducts]);
 
   // function getFirebaseOrderCount() {
   //     let ordersLength = 0;
@@ -76,7 +79,7 @@ function Cart() {
     const paymentData = {
       "api_username": "92ddcfab96e34a5f",
       "account_name": "EUR3D1",
-      "amount": calculateSumOfCart(),
+      "amount": cartSum,
       "order_reference": Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
       "nonce": "92ddcfab96e34a5f" + new Date(),
       "timestamp": new Date(),
@@ -109,15 +112,15 @@ function Cart() {
                                                     // ja võtan sealt CSS klassi
   return (
   <div>
-    <div>{cartProducts.map(element => <div className={styles.cartItem}>
+    <div>{cartProducts.map(element => <div key={element.cartProduct.id} className={styles.cartItem}>
       <div className={styles.cartItemName}>{element.cartProduct.name}</div>
-      <div className={styles.cartItemPrice}>{element.cartProduct.price} €</div>
+      <div className={styles.cartItemPrice}>{Number(element.cartProduct.price).toFixed(2)} €</div>
       <div className={styles.cartItemQuantityControls}>
         { !isParcelMachine(element) && <img className={styles.cartItemButton} onClick={() => onDecreaseQuantity(element)} src="/cart/minus.png" alt="" />}
         <div className={styles.cartItemQuantity}>{element.quantity} tk</div>
         { !isParcelMachine(element) && <img className={styles.cartItemButton} onClick={() => onIncreaseQuantity(element)} src="/cart/plus.png" alt="" />}
       </div>
-      <div className={styles.cartItemTotal}>{element.cartProduct.price * element.quantity} €</div>
+      <div className={styles.cartItemTotal}>{Number(element.cartProduct.price * element.quantity).toFixed(2)} €</div>
       <img 
           className={ isParcelMachine(element) ? 
                         styles.buttonDisabled :
@@ -128,7 +131,7 @@ function Cart() {
       </div>)}
     { cartProducts.length > 0 && <div className={styles.cartSum}>
         <PackageMachines cartContent={cartProducts} sendProducts={setCartProducts} /> 
-        <div>{calculateSumOfCart()} €</div>
+        <div>{cartSum} €</div>
         <button className={styles.paymentButton} onClick={onPay}>Maksa ›</button>
       </div> }
     </div>
