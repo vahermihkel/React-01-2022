@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PackageMachines from "../components/PackageMachines";
 import Payment from "../components/Payment";
-import { cartSumService } from '../services/CartSumService'
+import { cartSumService } from '../services/cartSumService'
 import styles from "./Cart.module.css";
 
 function Cart() {
