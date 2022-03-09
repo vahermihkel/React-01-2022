@@ -12,10 +12,11 @@ function Login() {
 
   return (
   <form onSubmit={onLogin}>
-    <label>E-mail</label>
-    <input type="text" ref={emailRef} />
-    <label>Parool</label>
-    <input type="text" ref={passwordRef} />
+    <label>E-mail</label> <br />
+    <input type="text" ref={emailRef} /> <br />
+    <label>Parool</label> <br />
+    <input type="password" ref={passwordRef} /> <br />
+    <button>Logi sisse</button>
   </form>)
 }
 

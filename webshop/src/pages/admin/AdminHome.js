@@ -8,6 +8,9 @@ function AdminHome() {
     <Link to="/admin/tooted">
       <button>Muuda/kustuta tooteid</button>
     </Link>
+    <Link to="/admin/registreeri">
+      <button>Lisa uus admin kasutaja</button>
+    </Link>
   </div>)
 }
 

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from "react"; // hook  - reacti koodilõigud 
   //componentide ja html-i manipuleerimiseks võimalikult efektiivselt
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,6 +12,7 @@ function AddProduct() {
   const imgRef = useRef();
   const [products, setProducts] = useState([]);
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => { 
     fetch("https://webshop-02-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json")
@@ -52,6 +53,7 @@ function AddProduct() {
         position: "bottom-right",
         theme: "dark"
       });
+      navigate("/admin/tooted");
     }
   }
 

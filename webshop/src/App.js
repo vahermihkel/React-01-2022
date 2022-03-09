@@ -10,6 +10,7 @@ import ViewProducts from './pages/admin/ViewProducts';
 import EditProduct from './pages/admin/EditProduct';
 import NotFound from './pages/NotFound';
 import Login from './pages/auth/Login';
+import Signup from './pages/auth/Signup';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
        <Route path='/admin/tooted' exact element={<ViewProducts />} />
        <Route path='/admin/muuda/:productId' exact element={<EditProduct />} />
        <Route path='/admin/lisa' exact element={<AddProduct />} />
+       <Route path='/admin/registreeri' exact element={<Signup />} />
        <Route path='/tellimus' exact element={<PaymentCompleted />} />
        <Route path='/logi-sisse' exact element={<Login />} />
        <Route path='*' exact element={<NotFound />} />
