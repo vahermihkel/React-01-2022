@@ -6,11 +6,15 @@ import './index.css';
 import './i18n';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { AuthContextProvider } from './store/authContext';
+// import { CartSumContextProvider } from './store/cartSumContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
