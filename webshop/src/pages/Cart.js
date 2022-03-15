@@ -82,7 +82,6 @@ function Cart() {
 
                                                     // pöördun imporditud CSS klassi poole                                                // ja võtan sealt CSS klassi
   return (
-  <div>
     <div>{cartProducts.map(element => <div key={element.cartProduct.id} className={styles.cartItem}>
       <div className={styles.cartItemName}>{element.cartProduct.name}</div>
       <div className={styles.cartItemPrice}>{Number(element.cartProduct.price).toFixed(2)} €</div>
@@ -106,7 +105,6 @@ function Cart() {
         <Payment sumOfCart={cartSum} />
       </div> }
     </div>
-  </div>
   )
 }
 

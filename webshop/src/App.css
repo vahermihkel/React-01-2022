@@ -26,3 +26,8 @@ input[type=number] {
 .slick-prev:before, .slick-next:before {
     color: black !important;
 }
+
+#map { 
+    height: 180px; 
+    margin: 10%;
+}

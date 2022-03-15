@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 import './NavigationBar.css';
 import { cartSumService } from '../services/cartSumService';
 // import { loggedInService } from '../services/loggedInService';
@@ -41,6 +42,9 @@ function NavigationBar() {
     { ctx.loggedIn && <Nav.Link as={Link} to="/admin">{t('admin-button')}</Nav.Link>}      <Nav.Link as={Link} to="/ostukorv">{t('cart-button')}</Nav.Link>
       <div className="cart-sum">{cartSum}</div>
     </Nav>
+    <Link to="/poed">
+      <Button>Meie poed</Button>
+    </Link>
     <img className="lang-flag" alt="" src="/language/united-kingdom.png" onClick={() => changeLang('en')} />
     <img className="lang-flag" alt="" src="/language/estonia.png" onClick={() => changeLang('ee')} />
     <img className="lang-flag" alt="" src="/language/russia.png" onClick={() => changeLang('ru')} />

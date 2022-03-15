@@ -1,3 +1,4 @@
+import React from "react";
 
 function SortButtons(props) {
   function sortAZ() {
@@ -20,12 +21,13 @@ function SortButtons(props) {
     props.prodsSorted(props.prods.slice());
   }
 
-  return (<div>
+  return (
+  <>
     <button onClick={sortAZ}>Sorteeri A-Z</button>
     <button onClick={sortZA}>Sorteeri Z-A</button>
     <button onClick={sortPriceAsc}>Hinna järgi kasvavalt</button>
     <button onClick={sortPriceDesc}>Hinna järgi kahanevalt</button>
-  </div>)
+  </>)
 }
 
 export default SortButtons;

@@ -13,6 +13,7 @@ import Login from './pages/auth/Login';
 import Signup from './pages/auth/Signup';
 import { useContext } from 'react';
 import AuthContext from './store/authContext';
+import Map from './pages/Map';
 // import { loggedInService } from './services/loggedInService';
 // import { useState } from 'react';
 
@@ -20,6 +21,15 @@ function App() {
   const ctx = useContext(AuthContext);
 
   // const [loggedIn, setLoggedIn] = useState(getLoggedInFromSS());
+
+  // function getLoggedInFromSS() {
+  //   return sessionStorage.getItem("loggedIn");
+  // }
+
+    // function getLoggedInFromSS() {
+  //   return sessionStorage.getItem("loggedIn");
+  // }
+
 
   // function getLoggedInFromSS() {
   //   return sessionStorage.getItem("loggedIn");
@@ -41,6 +51,7 @@ function App() {
         <Route path='/admin/registreeri' exact element={<Signup />} />
        </Route>}
        { !ctx.loggedIn && <Route path="/admin/*" element={<Login />} />}
+       <Route path='/poed' exact element={<Map />} />
        <Route path='/tellimus' exact element={<PaymentCompleted />} />
        <Route path='/logi-sisse' exact element={<Login />} />
        <Route path='*' exact element={<NotFound />} />
